@@ -1,0 +1,33 @@
+<!--
+  ~   Copyright 2019 . AppDynamics LLC and its affiliates.
+  ~   All Rights Reserved.
+  ~   This is unpublished proprietary source code of AppDynamics LLC and its affiliates.
+  ~   The copyright notice above does not evidence any actual or intended publication of such source code.
+  ~
+  -->
+
+<monitor>
+    <name>AWS ELB Monitor</name>
+    <type>managed</type>
+    <description>AWS ELB Monitoring Extension</description>
+    <monitor-configuration></monitor-configuration>
+    <monitor-run-task>
+        <execution-style>periodic</execution-style>
+        <execution-frequency-in-seconds>60</execution-frequency-in-seconds>
+        <name>AWS ELB Monitor Run task</name>
+        <display-name>AWS ELB Monitor Run task</display-name>
+        <description>AWS ELB Monitor Run task</description>
+        <type>java</type>
+        <execution-timeout-in-secs>60</execution-timeout-in-secs>
+
+        <task-arguments>
+            <argument name="config-file" is-required="true" default-value="monitors/AWSELBMonitor/config.yml"/>
+        </task-arguments>
+
+        <java-task>
+            <classpath>aws-elb-monitoring-extension.jar</classpath>
+            <impl-class>com.appdynamics.extensions.aws.elb.ELBMonitor</impl-class>
+        </java-task>
+
+    </monitor-run-task>
+</monitor>

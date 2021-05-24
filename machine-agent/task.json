@@ -1,0 +1,96 @@
+{
+    "family": "ecs-appd-aws-ingestion-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "appd-aws-ingestion",
+            "image": "ghcr.io/alex-ykozlov-cliproj/appd-aws-ingestion/appd-aws-ingestion:1.0.0",
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "appd-aws-ecs-tasks",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "environment": [
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_HOST_NAME",
+                    "value": ".."
+                },
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_PORT",
+                    "value": "443"
+                },
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_SSL_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "APPDYNAMICS_AGENT_ACCOUNT_NAME",
+                    "value": "."
+                },
+                {
+                    "name": "APPDYNAMICS_AGENT_UNIQUE_HOST_ID",
+                    "value": "."
+                },
+                {
+                    "name": "APPDYNAMICS_SIM_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "AWS_DISPLAY_ACCOUNT_NAME",
+                    "value": "..."
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "APPD_API_KEY",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "APPD_GLOBAL_ACCOUNT",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "AWS_REGIONS",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "AWS_ACCESS_KEY",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "AWS_SECRET_KEY",
+                    "valueFrom": "..."
+                }
+            ],
+            "healthCheck": {
+                "retries": 3,
+                "command": [
+                    "CMD-SHELL",
+                    "exit 0"
+                ],
+                "timeout": 5,
+                "interval": 300,
+                "startPeriod": 300
+            },
+            "linuxParameters": {
+                "initProcessEnabled": true
+            }
+        }
+    ],
+    "placementConstraints": [],
+    "memory": "512",
+    "cpu": "256",
+    "taskRoleArn": "arn:aws:iam::884077911076:role/appd-aws-magent-TaskRole",
+    "executionRoleArn": "arn:aws:iam::884077911076:role/ecsTaskExecutionRole"
+}

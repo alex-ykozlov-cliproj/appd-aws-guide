@@ -1,0 +1,83 @@
+{
+    "family": "ecs-appd-dbagent-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "appd-dbagent",
+            "image": "ghcr.io/alex-y-kozlov-sandbox/appd-aws-ingestion/db-agent:1.0.0",
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "appd-aws-ecs-tasks",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "environment": [
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_HOST_NAME",
+                    "value": ".."
+                },
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_PORT",
+                    "value": "443"
+                },
+                {
+                    "name": "APPDYNAMICS_CONTROLLER_SSL_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "APPDYNAMICS_AGENT_ACCOUNT_NAME",
+                    "value": "..."
+                },
+                {
+                    "name": "APPDYNAMICS_DB_AGENT_NAME",
+                    "value": "AWS-DBAgent"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "APPD_API_KEY",
+                    "valueFrom": "..."
+                },
+                {
+                    "name": "APPD_GLOBAL_ACCOUNT",
+                    "valueFrom": "..."
+                }
+            ],
+            "healthCheck": {
+                "retries": 3,
+                "command": [
+                    "CMD-SHELL",
+                    "exit 0"
+                ],
+                "timeout": 5,
+                "interval": 300,
+                "startPeriod": 300
+            },
+            "linuxParameters": {
+                "initProcessEnabled": true
+            }
+        }
+    ],
+    "placementConstraints": [],
+    "memory": "1024",
+    "cpu": "256",
+    "taskRoleArn": "...",
+    "executionRoleArn": "..."
+}
