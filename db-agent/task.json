@@ -7,7 +7,7 @@
     "containerDefinitions": [
         {
             "name": "appd-dbagent",
-            "image": "ghcr.io/alex-y-kozlov-sandbox/appd-aws-ingestion/db-agent:1.0.0",
+            "image": "ghcr.io/alex-ykozlov-cliproj/appd-aws-ingestion/appd-dbagent:1.0.0",
             "portMappings": [
                 {
                     "containerPort": 3000,
