@@ -5,6 +5,12 @@ All commands assume ghcr.io/alex-ykozlov-cliproj/ registry. Replace with the reg
 # Building
 Build docker image: ` ./build-image.sh `
 
+# Running in Docker on local machine
+
+```sh
+docker run --rm -it --name dbagent --env-file env.txt ghcr.io/alex-ykozlov-cliproj/appd-aws-ingestion/appd-dbagent:1.0.0
+```
+
 # Running in ECS
 
 ECS taskdef is in `task.json`.
@@ -17,7 +23,7 @@ It already includes all ENV, Secrets and Roles.
 `aws ecs register-task-definition --cli-input-json file://task.json`
 
 3. Create task:
-  ```
+  ```sh
   aws ecs run-task \
   --cluster appd-aws-test-Cluster-tGtIrtZwGlDL \
   --task-definition ecs-appd-dbagent-task \
