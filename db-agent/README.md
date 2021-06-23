@@ -32,3 +32,18 @@ It already includes all ENV, Secrets and Roles.
   --propagate-tags TASK_DEFINITION \
   --network-configuration 'awsvpcConfiguration={subnets=[...],securityGroups=[...]}'
   ```
+  
+## Running docekr-compose on Ubuntu (Reference)
+```sh
+sudo apt update
+sudo apt install snapd
+sudo systemctl unmask snapd.service
+sudo systemctl enable snapd.service
+sudo systemctl start snapd.service
+sudo snap install docker
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker–compose –version
+```
