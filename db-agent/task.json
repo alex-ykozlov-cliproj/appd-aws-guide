@@ -52,11 +52,11 @@
                     "valueFrom": "..."
                 },
                 {
-                    "name": "APPD_API_KEY",
+                    "name": "APPDYNAMICS_AGENT_API_KEY",
                     "valueFrom": "..."
                 },
                 {
-                    "name": "APPD_GLOBAL_ACCOUNT",
+                    "name": "APPDYNAMICS_AGENT_GLOBAL_ACCOUNT",
                     "valueFrom": "..."
                 }
             ],
