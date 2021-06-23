@@ -33,7 +33,7 @@ It already includes all ENV, Secrets and Roles.
   --network-configuration 'awsvpcConfiguration={subnets=[...],securityGroups=[...]}'
   ```
   
-## Running docekr-compose on Ubuntu (Reference)
+# Running docker-compose on Ubuntu (Reference)
 ```sh
 sudo apt update
 sudo apt install snapd
