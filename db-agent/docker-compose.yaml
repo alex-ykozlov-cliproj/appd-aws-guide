@@ -4,12 +4,16 @@ services:
     image: ghcr.io/alex-ykozlov-cliproj/appd-aws-ingestion/appd-dbagent:1.0.0
     container_name: dbagent
     environment:
-    - APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY="..."
-    - APPD_API_KEY="..."
-    - APPD_GLOBAL_ACCOUNT="..."
-    - APPDYNAMICS_CONTROLLER_HOST_NAME="..."
-    - APPDYNAMICS_CONTROLLER_PORT= "443"
-    - APPDYNAMICS_CONTROLLER_SSL_ENABLED="true"
     - APPDYNAMICS_AGENT_ACCOUNT_NAME="..."
+    - APPDYNAMICS_AGENT_GLOBAL_ACCOUNT_NAME="..."
+    - APPDYNAMICS_CONTROLLER_HOST_NAME="..."
+    - APPDYNAMICS_CONTROLLER_PORT="443"
+    - APPDYNAMICS_CONTROLLER_SSL_ENABLED="true"
+    - APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY="" #comes from a secret
     - APPDYNAMICS_DB_AGENT_NAME="My-DBAgent"
+    # - APPDYNAMICS_AGENT_UNIQUE_HOST_ID="" #optional
+    - APPDYNAMICS_AGENT_PROXY_HOST="" #optional
+    - APPDYNAMICS_AGENT_PROXY_PORT="" #optional
+    - APPDYNAMICS_AGENT_PROXY_USER="" #optional
+    - APPDYNAMICS_AGENT_PROXY_PASS="" #optional    
     restart: unless-stopped
